@@ -1,7 +1,7 @@
 # os-TCP-IP-
 
 Contributors:
-  Nathanael Ostheller
+  Nathanael Ostheller,
   Alex Shirk
  
  Implement 2 sets of commands:
