@@ -9,63 +9,63 @@ This file contains the functions for all the commands
 //     printf("get\n");
 //     return 0;
 // }
-int get() {
-    printf("get\n");
+int get(char* filename) {
+    printf("get, filename=%s\n", filename);
     return 0;
 }
-int put() {
-    printf("put\n");
+int put(char* filename) {
+    printf("put, filename=%s\n", filename);
     return 0;
 }
-int ls() {
-    printf("ls\n");
+int ls(char* filename) {
+    printf("ls, filename=%s\n", filename);
     return 0;
 }
-int cd() {
-    printf("cd\n");
+int cd(char* filename) {
+    printf("cd, filename=%s\n", filename);
     return 0;
 }
-int pwd() {
-    printf("pwd\n");
+int pwd(char* filename) {
+    printf("pwd, filename=%s\n", filename);
     return 0;
 }
-int mymkdir() {
-    printf("mymkdir\n");
+int mymkdir(char* filename) {
+    printf("mymkdir, filename=%s\n", filename);
     return 0;
 }
-int myrmdir() {
-    printf("myrmdir\n");
+int myrmdir(char* filename) {
+    printf("myrmdir, filename=%s\n", filename);
     return 0;
 }
-int rm() {
-    printf("rm\n");
+int rm(char* filename) {
+    printf("rm, filename=%s\n", filename);
     return 0;
 }
-int lcat() {
-    printf("lcat\n");
+int lcat(char* filename) {
+    printf("lcat, filename=%s\n", filename);
     return 0;
 }
-int lls() {
-    printf("lls\n");
+int lls(char* filename) {
+    printf("lls, filename=%s\n", filename);
     return 0;
 }
-int lcd() {
-    printf("lcd\n");
+int lcd(char* filename) {
+    printf("lcd, filename=%s\n", filename);
     return 0;
 }
-int lpwd() {
-    printf("lpwd\n");
+int lpwd(char* filename) {
+    printf("lpwd, filename=%s\n", filename);
     return 0;
 }
-int lmkdir() {
-    printf("lmkdir\n");
+int lmkdir(char* filename) {
+    printf("lmkdir, filename=%s\n", filename);
     return 0;
 }
-int lrmdir() {
-    printf("lrmdir\n");
+int lrmdir(char* filename) {
+    printf("lrmdir, filename=%s\n", filename);
     return 0;
 }
-int lrm() {
-    printf("lrm\n");
+int lrm(char* filename) {
+    printf("lrm, filename=%s\n", filename);
     return 0;
 }
