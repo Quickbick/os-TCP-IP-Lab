@@ -1,18 +1,20 @@
+/*
+This file contains the functionality needed to execute each command, such as the cmdList and
+table of function pointers, as well as the related functions. 
+*/
 #include <stddef.h> //for NULL 
 #include <stdio.h>
 #include <string.h>
+
+#include "commands.h" //contains the functions for each command
 
 const char* const cmdList[] = {
     "get","put","ls","cd","pwd","mkdir","rmdir","rm",
     "lcat","lls","lcd","lpwd","lmkdir","lrmdir","lrm",0
 };
-int get() {
-    printf("get\n");
-    return 0;
-}
 //table of function pointers for the functions that take a char* as an argument and return an int
 int (*fptr[])(char*)={(int(*)())
-    get
+    get,put,ls,cd,pwd,mymkdir,myrmdir,rm,lcat,lls,lcd,lpwd,lmkdir,lrmdir,lrm
 };
 
 int findCmd(char* command) { //returns the index of a command 
@@ -35,7 +37,7 @@ int executeCommand(char* cmdLine) {
         int r = fptr[cmdIndex](cmdLine);    //calls the function at the given command index for a command
         printf("r=%d\n", r);
     } else {
-        printf("Error: command %s not found", cmdLine);
+        printf("Error: command %s not found\n", cmdLine);
     }
     printf("end of processCommand\n");
 }
