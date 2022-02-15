@@ -59,7 +59,7 @@ int main(int argc, char *argv[], char *env[])
       if (line[0]==0)                  // exit if NULL line
          exit(0);
 
-      processCommand(line); 
+      executeCommand(line); 
 
       // Send ENTIRE line to server
       n = write(sfd, line, MAX);
