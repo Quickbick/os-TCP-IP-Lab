@@ -25,10 +25,9 @@ int n;
 struct sockaddr_in saddr; 
 int sfd;
 
-int main(int argc, char *argv[], char *env[]) 
-{ 
+int main(int argc, char *argv[], char *env[]) { 
     int n; char how[64];
-    int i;
+    int i, type;
 
     printf("1. create a socket\n");
     sfd = socket(AF_INET, SOCK_STREAM, 0); 
@@ -51,23 +50,28 @@ int main(int argc, char *argv[], char *env[])
 
     printf("********  processing loop  *********\n");
     while (1){
-      printf("input a line : ");
-      bzero(line, MAX);                // zero out line[ ]
-      fgets(line, MAX, stdin);         // get a line (end with \n) from stdin
+        printf("input a line : ");
+        bzero(line, MAX);                // zero out line[ ]
+        fgets(line, MAX, stdin);         // get a line (end with \n) from stdin
 
-      line[strlen(line)-1] = 0;        // kill \n at end
-      if (line[0]==0)                  // exit if NULL line
-         exit(0);
+        line[strlen(line)-1] = 0;        // kill \n at end
+        if (line[0]==0){                 // exit if NULL line
+            exit(0);
+        }
 
-      executeCommand(line); 
+        type = checkType(line);
+        if (type == 0){
+            // Send ENTIRE line to server
+            n = write(sfd, line, MAX);
+            printf("client: wrote n=%d bytes; line=(%s)\n", n, line);
 
-      // Send ENTIRE line to server
-      n = write(sfd, line, MAX);
-      printf("client: wrote n=%d bytes; line=(%s)\n", n, line);
-
-      // Read a line from sock and show it
-      n = read(sfd, ans, MAX);
-      printf("client: read  n=%d bytes; echo=(%s)\n",n, ans);
-  }
+            // Read a line from sock and show it
+            n = read(sfd, ans, MAX);
+            printf("client: read  n=%d bytes; echo=(%s)\n",n, ans);
+        }
+        else if (type == 1){
+            //executes command
+        }
+    }
 }
 
