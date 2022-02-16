@@ -15,6 +15,12 @@ const char* const cmdList[] = {
     "lcat","lls","lcd","lpwd","lmkdir","lrmdir","lrm",0
 };
 
+//table of function pointers for the functions that take a char* as an argument and return an int
+//the char* is for the argument
+int (*fptr[])(char*)={(int(*)()) 
+    get,put,ls,cd,pwd,mymkdir,myrmdir,rm,lcat,lls,lcd,lpwd,lmkdir,lrmdir,lrm
+};
+
 //finds command's number in list
 int findCmd(char* command) { //returns the index of a command 
     int i = 0;
@@ -44,4 +50,24 @@ int checkType(char* line){
     else{
         return -1; //invalid command
     }
+}
+
+//runs basic command
+char* executeCommand(char* cmdLine, char* sendStore) { //may not need char buffer?
+    char delim = ' ', args[5];
+    char* token;
+    token = strtok(cmdLine, &delim);
+    for(int i = 0; token != 0; i++){
+        token = strtok(NULL, &delim);
+        arg[i] = token;
+    }
+    int cmdIndex = findCmd(cmdLine);
+    if (cmdIndex >= 0) {
+        //calls the function at the given command index
+        int r = fptr[cmdIndex](filename);
+        printf("r=%d\n", r);
+    } else {
+        printf("Error: command %s not found\n", cmdLine);
+    }
+    printf("end of processCommand\n");
 }
