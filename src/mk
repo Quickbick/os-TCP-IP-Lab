@@ -1,0 +1,4 @@
+cd client
+./mk
+cd ../server
+./mk
