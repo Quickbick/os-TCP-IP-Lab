@@ -70,27 +70,28 @@ int main()
        printf("    IP=%s  port=%d\n", "127.0.0.1", ntohs(caddr.sin_port));
        printf("-----------------------------------------------\n");
 
-       // Processing loop
-       while(1){
-         printf("server ready for next request ....\n");
-         n = read(cfd, line, MAX);
-         if (n==0){
-           printf("server: client died, server loops\n");
-           close(cfd);
-           break;
-         }
+      // Processing loop
+      while(1){
+        printf("server ready for next request ....\n");
+        n = read(cfd, line, MAX);
+        if (n==0){
+          printf("server: client died, server loops\n");
+          close(cfd);
+          break;
+        }
 
-         // show the line string
-         printf("server: read  n=%d bytes; line=[%s]\n", n, line);
+        // show the line string
+        printf("server: read  n=%d bytes; line=[%s]\n", n, line);
+        strcat(line, " ECHO");
 
-         strcat(line, " ECHO");
+        //execute command
 
-         // send the echo line to client 
-         n = write(cfd, line, MAX);
+        // send the echo line to client 
+        n = write(cfd, line, MAX);
 
-         printf("server: wrote n=%d bytes; ECHO=[%s]\n", n, line);
-         printf("server: ready for next request\n");
-       }
-    }
+          printf("server: wrote n=%d bytes; ECHO=[%s]\n", n, line);
+          printf("server: ready for next request\n");
+        }
+      }
 }
 
