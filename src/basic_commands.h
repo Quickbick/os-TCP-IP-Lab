@@ -53,7 +53,7 @@ int checkType(char* line){
 }
 
 //runs basic command
-char* executeCommand(char* cmdLine, char* sendStore) { //may not need char buffer?
+int executeCommand(char* cmdLine) {
     char delim = ' ';
     char* token;
     token = strtok(cmdLine, &delim);
