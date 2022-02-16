@@ -41,10 +41,10 @@ int checkType(char* line){
     strcpy(cpyLine, line);
     token = strtok(cpyLine, &delim);
     cmdNum = findCmd(token);
-    if (cmdList >= 0 && cmdList <= 7){
+    if (cmdNum >= 0 && cmdNum <= 7){
         return 0; //0 server
     }
-    else if (cmdList >= 8 && cmdList <=14){
+    else if (cmdNum >= 8 && cmdNum <=14){
         return 1; //1 local
     }
     else{
