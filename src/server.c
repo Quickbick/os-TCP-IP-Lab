@@ -15,6 +15,8 @@
 #include <libgen.h>
 #include <time.h>
 
+#include "basic_commands.h"
+
 #define MAX 256
 #define PORT 1234
 

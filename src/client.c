@@ -14,6 +14,8 @@
 #include <libgen.h>     // for dirname()/basename()
 #include <time.h> 
 
+#include "basic_commands.h"
+
 #define MAX 256
 #define PORT 1234
 
@@ -56,6 +58,8 @@ int main(int argc, char *argv[], char *env[])
       line[strlen(line)-1] = 0;        // kill \n at end
       if (line[0]==0)                  // exit if NULL line
          exit(0);
+
+      executeCommand(line); 
 
       // Send ENTIRE line to server
       n = write(sfd, line, MAX);
