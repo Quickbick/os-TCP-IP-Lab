@@ -41,6 +41,7 @@ char* tokenize(char* cmdLine) {
         ++i;
     }
     printf("cmdLine: %s result: %s\n", cmdLine, result);
+    return result;
 }
 int executeCommand(char* cmdLine) { 
     if (cmdLine == NULL) {
