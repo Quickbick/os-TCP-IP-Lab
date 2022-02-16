@@ -54,17 +54,16 @@ int checkType(char* line){
 
 //runs basic command
 char* executeCommand(char* cmdLine, char* sendStore) { //may not need char buffer?
-    char delim = ' ', args[5];
+    char delim = ' ';
     char* token;
     token = strtok(cmdLine, &delim);
-    for(int i = 0; token != 0; i++){
+    if (token != NULL){
         token = strtok(NULL, &delim);
-        arg[i] = token;
     }
     int cmdIndex = findCmd(cmdLine);
     if (cmdIndex >= 0) {
         //calls the function at the given command index
-        int r = fptr[cmdIndex](filename);
+        int r = fptr[cmdIndex](token);
         printf("r=%d\n", r);
     } else {
         printf("Error: command %s not found\n", cmdLine);
