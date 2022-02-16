@@ -5,6 +5,8 @@ This file contains the functions for all the commands
 #include <stdio.h>
 #include <string.h>
 
+char printHolder[2000];
+
 // int get() {
 //     printf("get\n");
 //     return 0;
