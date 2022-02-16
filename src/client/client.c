@@ -14,7 +14,7 @@
 #include <libgen.h>     // for dirname()/basename()
 #include <time.h> 
 
-#include "basic_commands.h"
+#include "../basic_commands.h"
 
 #define MAX 256
 #define PORT 1234
