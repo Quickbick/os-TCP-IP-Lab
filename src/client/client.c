@@ -48,6 +48,8 @@ int main(int argc, char *argv[], char *env[]) {
         exit(0); 
     } 
 
+    char temp[128];
+    chroot(getcwd(temp, 128));
     printf("********  processing loop  *********\n");
     while (1){
         printf("input a line : ");
