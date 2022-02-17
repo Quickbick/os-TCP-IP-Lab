@@ -61,6 +61,7 @@ int main(int argc, char *argv[], char *env[]) {
 
         type = checkType(line);
         if (type == 0){
+            printf("Type=server\n");
             // Send ENTIRE line to server
             n = write(sfd, line, MAX);
             printf("client: wrote n=%d bytes; line=(%s)\n", n, line);
@@ -68,9 +69,13 @@ int main(int argc, char *argv[], char *env[]) {
             // Read a line from sock and show it
             n = read(sfd, ans, MAX);
             printf("client: read  n=%d bytes; echo=(%s)\n",n, ans);
+            printf("print holder client side=%s", ans); //prints the result 
         }
-        else if (type == 1){
+        else if (type == 1){ //run the command locally 
+            printf("Type=client\n");
             //executes command
+            executeCommand(line); //runs the command locally 
+            printf("print holder=%s", printHolder); //prints the result 
         }
     }
 }
