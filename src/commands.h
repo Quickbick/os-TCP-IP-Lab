@@ -26,27 +26,28 @@ int put(char* filename) {
     return 0;
 }
 int ls(char* filename) {
-    sprintf(printHolder, "ls, filename=%s\n", filename);
+    lls(filename);
+    //and other code maybe for sending in batches? idk
     return 0;
 }
 int cd(char* filename) {
-    sprintf(printHolder, "cd, filename=%s\n", filename);
+    lcd(filename);
     return 0;
 }
 int pwd(char* filename) {
-    sprintf(printHolder, "pwd, filename=%s\n", filename);
+    lpwd(filename);
     return 0;
 }
 int mymkdir(char* filename) {
-    sprintf(printHolder, "mymkdir, filename=%s\n", filename);
+    lmkdir(filename);
     return 0;
 }
 int myrmdir(char* filename) {
-    sprintf(printHolder, "myrmdir, filename=%s\n", filename);
+    lrmdir(filename);
     return 0;
 }
 int rm(char* filename) {
-    sprintf(printHolder, "rm, filename=%s\n", filename);
+    lrm(filename);
     return 0;
 }
 int lcat(char* filename) {
