@@ -115,12 +115,13 @@ int lcd(char* filename) {
     return 0;
 }
 int lpwd(char* filename) {
-    sprintf(printHolder, "lpwd, filename=%s\n", filename);
+    char buf[128];
+    getcwd(buf, 128);
+    sprintf(printHolder, "lpwd=%s\n", buf);
     return 0;
 }
 int lmkdir(char* filename) {
     int r = mkdir(filename, 0755);
     sprintf(printHolder, "lmkdir, successfully made file: %s\n", filename);
-
     return 0;
 }
