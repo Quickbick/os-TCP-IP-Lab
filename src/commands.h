@@ -107,7 +107,12 @@ int lrmdir(char* filename) {
     return 0;
 }
 int lrm(char* filename) {
-    sprintf(printHolder, "lrm, filename=%s\n", filename);
+    int r = unlink(filename);
+    if (r < 0) {
+        sprintf(printHolder, "lrm error, file %s does not exist\n", filename);
+    } else {
+        sprintf(printHolder, "lrm success, filename=%s\n", filename);
+    }
     return 0;
 }
 int lcd(char* filename) {
