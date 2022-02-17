@@ -54,6 +54,9 @@ int lcat(char* filename) {
     return 0;
 }
 int lls(char* filename) {
+    if (!filename) {
+        filename = ".";
+    }
     sprintf(printHolder, "lls, filename=%s\n", filename);
     sprintf(printHolder, "test");
     struct stat fstat, *sp;
