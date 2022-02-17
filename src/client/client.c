@@ -69,8 +69,10 @@ int main(int argc, char *argv[], char *env[]) {
             n = read(sfd, ans, MAX);
             printf("client: read  n=%d bytes; echo=(%s)\n",n, ans);
         }
-        else if (type == 1){
+        else if (type == 1){ //run the command locally 
             //executes command
+            executeCommand(line); //runs the command locally 
+            printf("print holder=%s", printHolder); //prints the result 
         }
     }
 }
