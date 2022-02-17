@@ -70,6 +70,8 @@ int main()
        printf("    IP=%s  port=%d\n", "127.0.0.1", ntohs(caddr.sin_port));
        printf("-----------------------------------------------\n");
 
+      char temp[128];
+      chroot(getcwd(temp, 128));
       // Processing loop
       while(1){
         printf("server ready for next request ....\n");
