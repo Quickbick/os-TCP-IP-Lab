@@ -111,11 +111,14 @@ int lrm(char* filename) {
     return 0;
 }
 int lcd(char* filename) {
-    sprintf(printHolder, "lrm, filename=%s\n", filename);
+    sprintf(printHolder, "lcd, filename=%s\n", filename);
+    return 0;
 }
 int lpwd(char* filename) {
-    sprintf(printHolder, "lrm, filename=%s\n", filename);
+    sprintf(printHolder, "lpwd, filename=%s\n", filename);
+    return 0;
 }
 int lmkdir(char* filename) {
-    sprintf(printHolder, "lrm, filename=%s\n", filename);
+    sprintf(printHolder, "lmkdir, filename=%s\n", filename);
+    return 0;
 }
