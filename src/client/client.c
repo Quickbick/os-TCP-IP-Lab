@@ -79,5 +79,33 @@ int main(int argc, char *argv[], char *env[]) {
             executeCommand(line); //runs the command locally 
             printf("print holder=%s\n", printHolder); //prints the result 
         }
+        else if (type == 2){ //special for get and put
+            char delim = ' ';
+            char* token;
+            token = strtok(line, &delim);
+            if (token != NULL){
+                token = strtok(NULL, &delim);
+            }
+            int cmdIndex = findCmd(line);
+            if(cmdIndex == 0){ //get
+                n = write(sfd, line, MAX);
+                printf("client: wrote n=%d bytes; line=(%s)\n", n, line);
+                n = write(sfd, token, MAX);
+                FILE* outfile;
+                outfile = fopen(token, "w");
+                while(1){
+                    bzero(ans, MAX);
+                    read(sfd, ans, MAX);
+                    if(strcmp(ans, "$$$$") == 0){
+                        break;
+                    }
+                    fprintf(outfile, "%s", ans);
+                }
+                fclose(outfile);
+            }
+            else{ //put
+
+            }
+        }
     }
 }

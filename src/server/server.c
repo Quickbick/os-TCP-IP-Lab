@@ -24,6 +24,7 @@ int n;
 
 char ans[MAX];
 char line[MAX];
+char hold[MAX];
 
 int main() 
 { 
@@ -84,17 +85,32 @@ int main()
 
         // show the line string
         printf("server: read  n=%d bytes; line=[%s]\n", n, line);
+        if (strcmp(line, "get") == 0){
+          n = read(cfd, line, MAX);
+          FILE* infile;
+          infile = fopen(line, "r");
+          while (1){
+            if(feof(infile)){
+              write(cfd, "$$$$", MAX);
+              break;
+            }
+            fgets(hold, MAX, infile);
+            write(cfd, hold, MAX);
+            bzero(hold, MAX);
+          }
+          fclose(infile);
+        }
+        else{
+          //execute command
+          executeCommand(line); //runs the command here on the server
+          printf("print holder server side=%s", printHolder); //prints the result for debugging
 
-        //execute command
-        executeCommand(line); //runs the command here on the server
-        printf("print holder server side=%s", printHolder); //prints the result for debugging
+          // send the printHolder back to client 
+          n = write(cfd, printHolder, MAX);
 
-        // send the printHolder back to client 
-        n = write(cfd, printHolder, MAX);
-
-          printf("server: wrote n=%d bytes; ECHO=[%s]\n", n, line);
-          printf("server: ready for next request\n");
+            printf("server: wrote n=%d bytes; ECHO=[%s]\n", n, line);
+            printf("server: ready for next request\n");
+          }
         }
       }
 }
-
