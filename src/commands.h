@@ -103,7 +103,12 @@ int lls(char* filename) {
     return 0;
 }
 int lrmdir(char* filename) {
-    sprintf(printHolder, "lrmdir, filename=%s\n", filename);
+    int r = rmdir(filename); 
+    if (r < 0) {
+        sprintf(printHolder, "lrmdir error, directory %s does not exist\n", filename);
+    } else {
+        sprintf(printHolder, "lrmdir success, filename=%s\n", filename);
+    }
     return 0;
 }
 int lrm(char* filename) {
@@ -135,7 +140,7 @@ int lmkdir(char* filename) {
     if (r < 0) {
         sprintf(printHolder, "lmkdir ERROR, (r=%d) directory: %s already exists\n", r, filename);
     } else {
-        sprintf(printHolder, "lmkdir, (r=%d) successfully made directory %s\n", r, filename);
+        sprintf(printHolder, "lmkdir success, (r=%d) made directory %s\n", r, filename);
     }
     return 0;
 }
