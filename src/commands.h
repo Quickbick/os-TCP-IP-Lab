@@ -119,6 +119,8 @@ int lpwd(char* filename) {
     return 0;
 }
 int lmkdir(char* filename) {
-    sprintf(printHolder, "lmkdir, filename=%s\n", filename);
+    int r = mkdir(filename, 0755);
+    sprintf(printHolder, "lmkdir, successfully made file: %s\n", filename);
+
     return 0;
 }
