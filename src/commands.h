@@ -111,7 +111,12 @@ int lrm(char* filename) {
     return 0;
 }
 int lcd(char* filename) {
-    sprintf(printHolder, "lcd, filename=%s\n", filename);
+    int r = chdir(filename);
+    if (r < 0) {
+        sprintf(printHolder, "lcd error\n");
+    } else {
+        sprintf(printHolder, "lcd success\n");
+    }
     return 0;
 }
 int lpwd(char* filename) {
@@ -122,6 +127,10 @@ int lpwd(char* filename) {
 }
 int lmkdir(char* filename) {
     int r = mkdir(filename, 0755);
-    sprintf(printHolder, "lmkdir, successfully made file: %s\n", filename);
+    if (r < 0) {
+        sprintf(printHolder, "lmkdir ERROR, (r=%d) directory: %s already exists\n", r, filename);
+    } else {
+        sprintf(printHolder, "lmkdir, (r=%d) successfully made directory %s\n", r, filename);
+    }
     return 0;
 }
