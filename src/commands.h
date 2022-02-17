@@ -29,9 +29,77 @@ int put(char* filename) {
     return 0;
 }
 int ls(char* filename) {
-    lls(filename);
-    //and other code maybe for sending in batches? idk
+    DIR* temp;
+    struct dirent* holder;
+    memset(printHolder, NULL, strlen(printHolder));
+    if (!filename) {
+        filename = ".";
+    }
+    temp = opendir(filename);
+    holder = readdir(temp);
+    while (holder != NULL){
+        slsFile(holder->d_name);
+        holder = readdir(temp);
+    }
     return 0;
+}
+int slsFile(char* fname){
+    struct stat fstat, *sp;
+    int r, i;
+    char ftime[64], printBuffer[64];
+    sp = &fstat;
+    if ( (r = lstat(fname, &fstat)) < 0){
+        sprintf(printBuffer, "can’t stat %s\n", fname);
+        strcat(printHolder, printBuffer);
+        exit(1);
+    }
+    if ((sp->st_mode & 0xF000) == 0x8000){ // if (S_ISREG())
+        sprintf(printBuffer, "%c",'-');
+        strcat(printHolder, printBuffer);
+    }
+    if ((sp->st_mode & 0xF000) == 0x4000){ // if (S_ISDIR())
+        sprintf(printBuffer, "%c",'d');
+        strcat(printHolder, printBuffer);
+    }
+    if ((sp->st_mode & 0xF000) == 0xA000){ // if (S_ISLNK())
+        sprintf(printBuffer, "%c",'l');
+        strcat(printHolder, printBuffer);
+    }
+    for (i=8; i >= 0; i--){
+        if (sp->st_mode & (1 << i)){ // print r|w|x
+            sprintf(printBuffer, "%c", t1[i]);
+            strcat(printHolder, printBuffer);
+        }
+        else{
+            sprintf(printBuffer,"%c", t2[i]); // or print -
+            strcat(printHolder, printBuffer);
+        }
+    }
+    sprintf(printBuffer, "%4d ",sp->st_nlink); // link count
+    strcat(printHolder, printBuffer);
+    sprintf(printBuffer, "%4d ",sp->st_gid); // gid
+    strcat(printHolder, printBuffer);
+    sprintf(printBuffer, "%4d ",sp->st_uid); // uid
+    strcat(printHolder, printBuffer);
+    sprintf(printBuffer, "%8d ",sp->st_size); // file size
+    strcat(printHolder, printBuffer);
+    // print time
+    strcpy(ftime, ctime(&sp->st_ctime)); // print time in calendar form
+    ftime[strlen(ftime)-1] = 0; // kill \n at end
+    sprintf(printBuffer, "%s ",ftime);
+    strcat(printHolder, printBuffer);
+    // print name
+    sprintf(printBuffer, "%s", basename(fname)); // print file basename
+    strcat(printHolder, printBuffer);
+    // print -> linkname if symbolic file
+    if ((sp->st_mode & 0xF000)== 0xA000){
+        char linkname[FILENAME_MAX];
+        readlink(sp, linkname, FILENAME_MAX);
+        sprintf(printBuffer, " -> %s", linkname); // print linked name
+        strcat(printHolder, printBuffer);
+    }
+    sprintf(printBuffer, "\n");
+    strcat(printHolder, printBuffer);
 }
 int cd(char* filename) {
     lcd(filename);
@@ -64,10 +132,11 @@ int lls(char* filename) {
         filename = ".";
     }
     temp = opendir(filename);
-    do{
-        holder = readdir(temp);
+    holder = readdir(temp);
+    while (holder != NULL){
         lsFile(holder->d_name);
-    }while (holder != NULL);
+        holder = readdir(temp);
+    }
     return 0;
 }
 int lsFile(char* fname){

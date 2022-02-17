@@ -52,6 +52,7 @@ int main(int argc, char *argv[], char *env[]) {
     chroot(getcwd(temp, 128));
     printf("********  processing loop  *********\n");
     while (1){
+        memset(printHolder, NULL, strlen(printHolder));
         printf("input a line : ");
         bzero(line, MAX);                // zero out line[ ]
         fgets(line, MAX, stdin);         // get a line (end with \n) from stdin
@@ -69,15 +70,14 @@ int main(int argc, char *argv[], char *env[]) {
             printf("client: wrote n=%d bytes; line=(%s)\n", n, line);
 
             // Read a line from sock and show it
-            n = read(sfd, ans, MAX);
-            printf("client: read  n=%d bytes; echo=(%s)\n",n, ans);
+            n = read(sfd, ans, 2000);
             printf("print holder client side=%s", ans); //prints the result 
         }
         else if (type == 1){ //run the command locally 
             printf("Type=client\n");
             //executes command
             executeCommand(line); //runs the command locally 
-            printf("print holder=%s", printHolder); //prints the result 
+            printf("print holder=%s\n", printHolder); //prints the result 
         }
     }
 }
