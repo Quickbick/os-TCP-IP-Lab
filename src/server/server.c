@@ -82,12 +82,13 @@ int main()
 
         // show the line string
         printf("server: read  n=%d bytes; line=[%s]\n", n, line);
-        strcat(line, " ECHO");
 
         //execute command
+        executeCommand(line); //runs the command here on the server
+        printf("print holder server side=%s", printHolder); //prints the result for debugging
 
-        // send the echo line to client 
-        n = write(cfd, line, MAX);
+        // send the printHolder back to client 
+        n = write(cfd, printHolder, MAX);
 
           printf("server: wrote n=%d bytes; ECHO=[%s]\n", n, line);
           printf("server: ready for next request\n");
