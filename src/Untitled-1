@@ -1,0 +1,6 @@
+
+
+the client performs operations, and writes to screen 
+the server reads, performs operations, and writes to screen 
+
+client prints result of executeCommand
