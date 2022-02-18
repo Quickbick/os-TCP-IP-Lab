@@ -88,6 +88,7 @@ int main(int argc, char *argv[], char *env[]) {
             }
             int cmdIndex = findCmd(line);
             if(cmdIndex == 0){ //get
+                printf("Into put \n");
                 n = write(sfd, line, MAX);
                 printf("client: wrote n=%d bytes; line=(%s)\n", n, line);
                 n = write(sfd, token, MAX);
@@ -104,7 +105,22 @@ int main(int argc, char *argv[], char *env[]) {
                 fclose(outfile);
             }
             else{ //put
-
+                n = write(sfd, line, MAX);
+                n = write(sfd, token, MAX);
+                FILE* infile;
+                infile = fopen(token, "r");
+                printf("File opened\n");
+                while (1){
+                    if(feof(infile)){
+                        write(sfd, "$$$$", MAX);
+                        break;
+                    }
+                    fgets(ans, MAX, infile);
+                    printf("%s\n", ans);
+                    write(sfd, ans, MAX);
+                    bzero(ans, MAX);
+                }
+                fclose(infile);
             }
         }
     }

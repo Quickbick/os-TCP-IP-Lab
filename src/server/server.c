@@ -100,6 +100,20 @@ int main()
           }
           fclose(infile);
         }
+        else if(strcmp(line, "put") == 0){
+          n = read(cfd, hold, MAX);
+          FILE* outfile;
+          outfile = fopen(hold, "w");
+          while(1){
+            bzero(hold, MAX);
+            read(cfd, hold, MAX);
+            if(strcmp(hold, "$$$$") == 0){
+              break;
+            }
+            fprintf(outfile, "%s", hold);
+          }
+          fclose(outfile);
+        }
         else{
           //execute command
           executeCommand(line); //runs the command here on the server

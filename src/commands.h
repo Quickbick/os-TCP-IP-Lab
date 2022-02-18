@@ -20,13 +20,11 @@ char *t2 = "----------------";
 //     printf("get\n");
 //     return 0;
 // }
-int get(char* filename) {
-    sprintf(printHolder, "get, filename=%s\n", filename);
-    return 0;
+int get(char* filename){
+    //to avoid reworking
 }
-int put(char* filename) {
-    sprintf(printHolder, "put, filename=%s\n", filename);
-    return 0;
+int put(char* filename){
+    //to avoid reworking
 }
 int ls(char* filename) {
     DIR* temp;
